@@ -1,23 +1,30 @@
 name: CI
-env:
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+env: # Set the secret as an input
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
 on:
-  #Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main, test, dev ] #Augment your script such that you can deploy multiple versions ( eg. development, staging, production ), depending on the PR branch name
 
 jobs:
-  Clone-down:
-    name: Clown-down-repo
-    runs-on: ubuntu-latest
+  Test:
+    runs-on: self-hosted
     steps:
-      - name: Clone down repo
+      - name: Clone-down
         uses: actions/checkout@v2
-      - name: Upload repo
-        uses: actions/upload-artifact@v2 
+      - name: Run go test
+        run: cd frontend && go test
+  Build-and-push:
+    runs-on: self-hosted
+    needs: [Test]
+    steps:
+      - name: Clone-down
+        uses: actions/checkout@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          name: clone-down
-          path: .
+          username: ${{ env.docker_username }}
+          password: ${{ env.docker_password }}
