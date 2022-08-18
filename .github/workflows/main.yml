@@ -2,6 +2,7 @@ name: CI
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD}}
+  GIT_COMMIT: ${{ github.sha }}
 on:
   #Triggers the workflow on push or pull request events but only for the main branch
   push:
@@ -10,33 +11,14 @@ on:
     branches: [main]
 
 jobs:
-  Test:
+  Clone-down:
     runs-on: ubuntu-latest
+    container: golang:1.8.5 
     steps:
-      - name: Clone-down
+      - name: Clone down repo
         uses: actions/checkout@v2
-      - name: Run go test
-        run: cd frontend && go test
-  Build-and-push:
-    runs-on: ubuntu-latest
-    needs: [Test]
-    steps:
-      - name: Clone-down
-        uses: actions/checkout@v2
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
+      - name: Upload repo
+        uses: actions/upload-artifact@v2 
         with:
-          username: ${{ env.docker_username }}
-          password: ${{ env.docker_password }}
-
-      - name: Build frontend image
-        run: chmod +x ci/build-docker-frontend.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/build-docker-frontend.sh
-
-      - name: Push docker frontend
-        run: chmod +x ci/push-docker-frontend.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker-frontend.sh
-
-      - name: Build backend image
-        run: chmod +x ci/build-docker-backend.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/build-docker-backend.sh
-
-      - name: Push docker backend
-        run: chmod +x ci/push-docker-backend.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker-backend.sh
+          name: clone-down
+          path: .
