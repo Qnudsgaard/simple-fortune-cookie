@@ -1,5 +1,5 @@
 # we need all functionallity from the golang
-From golang:1.8.5
+From golang:latest
 
 # his also instructs Docker to use this directory as the default destination for all subsequent commands. instead of writing the full command
 WORKDIR /app 
