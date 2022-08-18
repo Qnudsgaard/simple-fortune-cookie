@@ -12,7 +12,7 @@ on:
 jobs:
   Clone-down:
     runs-on: ubuntu-latest
-    container: golang:1.8.5 
+    container: golang:latest
     steps:
       - name: Clone down repo
         uses: actions/checkout@v2
@@ -63,5 +63,19 @@ jobs:
           push: true
           context: ./backend
           tags: ${{ env.DOCKER_USERNAME }}/simple-fortune-cookie-backend:${{ github.sha }}
+  
+  Frontend-go-test:
+    needs: clone-down
+    runs-on: ubuntu-latest
+    container: golang:latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: clone-down
+          path: .
+      - name: Run frontend go test 
+        run: go test 
+        working-directory: ./frontend
         
           
