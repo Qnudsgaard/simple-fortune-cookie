@@ -13,7 +13,6 @@ jobs:
   Clone-down:
     name: Clown-down-repo
     runs-on: ubuntu-latest
-    container: golang:1.16
     steps:
       - name: Clone down repo
         uses: actions/checkout@v2
