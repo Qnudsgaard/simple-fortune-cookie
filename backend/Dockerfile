@@ -1,5 +1,5 @@
 # we need all functionallity from the golang
-From golang:latest 
+From golang:1.8.5
 
 # his also instructs Docker to use this directory as the default destination for all subsequent commands. instead of writing the full command
 WORKDIR /app 
@@ -13,8 +13,8 @@ RUN go mod download
 COPY *.go ./
 RUN go build
 
-#we then expose it to port 8000, but we can choose what we want.
-EXPOSE 8000
+#we then expose it to port 9000, but we can choose what we want.
+EXPOSE 9000
 
 #all that is left to do is to tell Docker what command to execute when our image is used to start a container.
 CMD ["./backend"]
