@@ -64,7 +64,7 @@ jobs:
           context: ./backend
           tags: ${{ env.DOCKER_USERNAME }}/simple-fortune-cookie-backend:${{ github.sha }}
   
-  Frontend-go-test:
+  Frontend-Go-Test:
     needs: clone-down
     runs-on: ubuntu-latest
     container: golang:latest
