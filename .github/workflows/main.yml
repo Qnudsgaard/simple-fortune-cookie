@@ -63,4 +63,3 @@ jobs:
           push: true
           context: ./backend
           tags: ${{ env.DOCKER_USERNAME }}/simple-fortune-cookie-backend:${{ github.sha }}
-#test
