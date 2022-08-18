@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    backend: 
+      build: backend/
+      ports:
+        - "9000:9000"
+      depends_on:
+        - redis
+      environment:
+        - REDIS_DNS=redis
+
+
+    frontend:
+      build: frontend/
+      ports: 
+      - "8080:8080"
+      depends_on:
+      - backend
+      environment:
+      - BACKEND_DNS=backend
+
+    redis:
+      image: redis
+      ports:
+      - "6379:6379"
+
+
