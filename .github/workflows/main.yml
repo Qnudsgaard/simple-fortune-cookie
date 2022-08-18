@@ -9,3 +9,15 @@ on:
   pull_request:
     branches: [main]
 
+jobs:
+  Clone-down:
+    name: Clone down repo
+    runs-on: self-hosted
+    container: gradle:6-jdk11
+    steps:
+    - uses: actions/checkout@v2
+    - name: Upload Repo
+      uses: actions/upload-artifact@v2
+      with:
+        name: code
+        path: .
