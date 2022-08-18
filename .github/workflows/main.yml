@@ -8,3 +8,16 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+
+jobs:
+  Clone-down:
+    runs-on: ubuntu-latest
+    container: golang:1.8.5 
+    steps:
+      - name: Clone down repo
+        uses: actions/checkout@v2
+      - name: Upload repo
+        uses: actions/upload-artifact@v2 
+        with:
+          name: clone-down
+          path: .
