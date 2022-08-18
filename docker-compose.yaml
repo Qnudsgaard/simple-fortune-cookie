@@ -1,4 +1,4 @@
-version: 'latets'
+version: 'latest'
 
 services:
     backend: 
