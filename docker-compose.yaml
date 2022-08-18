@@ -4,9 +4,11 @@ services:
     backend: 
       image: simple-fortune-cookie-backend
       ports:
-      - "8000:8000"
+        - "9000:9000"
       depends_on:
-      - redis
+        - redis
+      environment:
+        - REDIS_DNS=redis
 
 
     frontend:
@@ -15,10 +17,17 @@ services:
       - "8080:8080"
       depends_on:
       - backend
+      environment:
+      - BACKEND_DNS=backend
 
     redis:
       image: redis
       ports: 
       - "6379:6379"
+      volumes:
+      - redis:/data:rw
+
+volumes:
+  redis:
 
 
