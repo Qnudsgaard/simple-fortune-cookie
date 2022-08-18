@@ -9,3 +9,15 @@ on:
   pull_request:
     branches: [main]
 
+jobs:
+  Clone-down:
+    runs-on: ubuntu-latest
+    container: golang:latest
+    steps:
+      - name: Clone down repo
+        uses: actions/checkout@v2
+      - name: Upload repo
+        uses: actions/upload-artifact@v2 
+        with:
+          name: clone-down
+          path: .
