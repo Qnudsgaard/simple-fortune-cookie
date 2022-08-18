@@ -1,7 +1,7 @@
 name: CI
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD}}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 on:
   #Triggers the workflow on push or pull request events but only for the main branch
   push:
@@ -10,14 +10,14 @@ on:
     branches: [main]
 
 jobs:
-   Clone:
-    name: Clone repo
+  Clone-down:
     runs-on: ubuntu-latest
+    container: golang:1.8.5 
     steps:
-      - name: Clone repo
+      - name: Clone down repo
         uses: actions/checkout@v2
-      - name: Upload repo for other jobs
-        uses: actions/upload-artifact@v2
+      - name: Upload repo
+        uses: actions/upload-artifact@v2 
         with:
-          name: code
+          name: clone-down
           path: .
