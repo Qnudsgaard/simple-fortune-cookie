@@ -11,13 +11,13 @@ on:
 
 jobs:
   Clone-down:
-    name: Clone down repo
     runs-on: ubuntu-latest
-    container: gradle:6-jdk11
+    container: golang:latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Upload Repo
-      uses: actions/upload-artifact@v2
-      with:
-        name: code
-        path: .
+      - name: Clone down repo
+        uses: actions/checkout@v2
+      - name: Upload repo
+        uses: actions/upload-artifact@v2 
+        with:
+          name: clone-down
+          path: .
