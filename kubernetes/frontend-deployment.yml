@@ -16,7 +16,7 @@ spec:
         # arbitrary label we can match on elsewhere
     spec:
       containers:
-      - image:  Qnudsgaard/simple-fortune-cookie-frontend:latest
+      - image:  frederikkelan/frontend:1.0.0
         name: frontend 
         resources: {}
 status: {}

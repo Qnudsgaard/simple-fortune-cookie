@@ -11,7 +11,8 @@ var dbLink redis.Conn
 var usingRedis = false
 
 func init() {
-	conn, err := redis.Dial("tcp", fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "localhost")))
+	conn, err := redis.Dial("tcp", fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "db.student26")))
+	fmt.Println(fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "db.student26")))
 	if err != nil {
 		log.Println("redis", err)
 	} else {
