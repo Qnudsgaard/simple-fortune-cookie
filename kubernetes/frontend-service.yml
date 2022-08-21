@@ -7,9 +7,10 @@ metadata:
   name: frontend
 spec:
   ports:
-  - port: 8080
-    protocol: TCP
-    targetPort: 8080
+    - name: "8080"
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
   selector:
     app: frontend
   type: NodePort
