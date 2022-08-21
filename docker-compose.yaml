@@ -2,7 +2,7 @@ version: '3'
 
 services:
     backend: 
-      build: backend/
+      image: frederikkelan/backend:1.0.0
       ports:
         - "9000:9000"
       depends_on:
@@ -10,9 +10,8 @@ services:
       environment:
         - REDIS_DNS=redis
 
-
     frontend:
-      build: frontend/
+      image: frederikkelan/frontend:1.0.0
       ports: 
       - "8080:8080"
       depends_on:
