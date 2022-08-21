@@ -10,7 +10,6 @@ services:
       environment:
         - REDIS_DNS=redis
 
-
     frontend:
       build: frontend/
       ports: 
@@ -24,5 +23,6 @@ services:
       image: redis
       ports:
       - "6379:6379"
+     
 
 

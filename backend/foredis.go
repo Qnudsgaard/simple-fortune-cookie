@@ -12,6 +12,7 @@ var usingRedis = false
 
 func init() {
 	conn, err := redis.Dial("tcp", fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "localhost")))
+	fmt.Println(fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "localhost")))
 	if err != nil {
 		log.Println("redis", err)
 	} else {
