@@ -3,17 +3,16 @@ kind: Deployment
 metadata:
   name: frontend
   labels:
-    app: frontend      # arbitrary label on deployment
+    app: frontend
 spec:
   replicas: 1
   selector:
-    matchLabels:        # labels the replica selector should match
+    matchLabels:      
       app: frontend 
   template:
     metadata:
       labels:
-        app: frontend    # label for replica selector to match
-        # arbitrary label we can match on elsewhere
+        app: frontend    
     spec:
       containers:
       - image:  frederikkelan/frontend:1.0.0
